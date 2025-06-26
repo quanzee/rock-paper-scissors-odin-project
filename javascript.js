@@ -25,74 +25,71 @@ function capitalise(string) {
     return firstLetter + remainingLetters
 }
 
+function playRound(event) {
+    const computerChoice = getComputerChoice();
+    const humanChoice = event.target.textContent;
+    let loseMessage = `You lose! ${capitalise(computerChoice)} beats ${humanChoice.toLowerCase()}.`;
+    let winMessage = `You win! ${capitalise(humanChoice)} beats ${humanChoice.toLowerCase()}.`;
+    let drawMessage = "It's a draw!";
 
-
-function playGame() {
-
-    let humanScore = 0;
-    let computerScore = 0;
-
-    function playRound(humanChoice, computerChoice) {
-        let loseMessage = `You lose! ${capitalise(computerChoice)} beats ${humanChoice.toLowerCase()}.`;
-        let winMessage = `You win! ${capitalise(humanChoice)} beats ${computerChoice.toLowerCase()}.`;
-        let drawMessage = "It's a draw!";
-    
-        if (humanChoice.toLowerCase() === "rock") {
-            if (computerChoice === "paper") {
-                computerScore ++;
-                console.log(loseMessage);
-            }
-    
-            else if (computerChoice === "scissors") {
-                humanScore ++;
-                console.log(winMessage);
-            }
-    
-            else {
-                console.log(drawMessage);
-            }
+    if (humanChoice.toLowerCase() === "rock") {
+        if (computerChoice === "paper") {
+            computerScore ++;
+            console.log(loseMessage);
         }
-    
-        else if (humanChoice.toLowerCase() === "scissors") {
-            if (computerChoice === "rock") {
-                computerScore ++;
-                console.log(loseMessage);
-            }
-    
-            else if (computerChoice === "paper") {
-                humanScore ++;
-                console.log(winMessage);
-            }
-    
-            else {
-                console.log(drawMessage);
-            }
+
+        else if (computerChoice === "scissors") {
+            humanScore ++;
+            console.log(winMessage);
         }
-    
-        else if (humanChoice.toLowerCase() === "paper") {
-            if (computerChoice === "scissors") {
-                computerScore ++;
-                console.log(loseMessage);
-            }
-    
-            else if (computerChoice === "rock") {
-                humanScore ++;
-                console.log(winMessage);
-            }
-    
-            else {
-                console.log(drawMessage);
-            }
+
+        else {
+            console.log(drawMessage);
         }
     }
 
+    else if (humanChoice.toLowerCase() === "scissors") {
+        if (computerChoice === "rock") {
+            computerScore ++;
+            console.log(loseMessage);
+        }
 
+        else if (computerChoice === "paper") {
+            humanScore ++;
+            console.log(winMessage);
+        }
 
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
+        else {
+            console.log(drawMessage);
+        }
+    }
 
-    console.log(`Your score is ${humanScore} while the computer scored ${computerScore}.`);
+    else if (humanChoice.toLowerCase() === "paper") {
+        if (computerChoice === "scissors") {
+            computerScore ++;
+            console.log(loseMessage);
+        }
+
+        else if (computerChoice === "rock") {
+            humanScore ++;
+            console.log(winMessage);
+        }
+
+        else {
+            console.log(drawMessage);
+        }
+    }
 }
+
+
+
+let humanScore = 0;
+let computerScore = 0;
+
+btn = document.querySelectorAll("button");
+btn.forEach(button => {
+    button.addEventListener('click', playRound);    
+});
+
+score = document.createElement('div');
+
