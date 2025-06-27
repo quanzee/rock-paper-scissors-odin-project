@@ -10,13 +10,6 @@ function getComputerChoice() {
     return "scissors"
 }
 
-function getHumanChoice() {
-    let userInput = prompt("Choose rock, paper or scissors.");
-
-    return userInput
-}
-
-
 
 function capitalise(string) {
     let firstLetter = string[0].toUpperCase();
@@ -26,6 +19,8 @@ function capitalise(string) {
 }
 
 function playRound(event) {
+    if (gameOver) return;
+
     const computerChoice = getComputerChoice();
     const humanChoice = event.target.textContent;
     let loseMessage = `You lose! ${capitalise(computerChoice)} beats ${humanChoice.toLowerCase()}.`;
@@ -87,23 +82,46 @@ function playRound(event) {
 
     if (humanScore === 5){
         winner.textContent = "You are the winner! Congratulations!"
+        gameOver = true;
+        playAgainBtn.style.display = "inline-block";
     }
     else if (computerScore === 5) {
         winner.textContent = "The computer wins! Try again next time."
+        gameOver = true;
+        playAgainBtn.style.display = "inline-block";
     }
 }
 
+function clearHistory() {
+    humanScore = 0;
+    computerScore = 0;
+    gameOver = false;
+    gameResult.textContent = "";
+    winner.textContent = "";
+    computerSelectedChoice.textContent = "";
+    humanScoreDisplay.textContent = `Your score: ${humanScore}`;
+    computerScoreDisplay.textContent = `Computer score: ${computerScore}`;
+    playAgainBtn.style.display = "none";
+}
 
 let humanScore = 0;
 let computerScore = 0;
-
-btn = document.querySelectorAll("button");
-btn.forEach(button => {
-    button.addEventListener('click', playRound);    
-});
+let gameOver = false;
 
 const gameResult = document.querySelector(".game-result");
 const computerSelectedChoice = document.querySelector(".computer-choice");
 const humanScoreDisplay = document.querySelector(".human-score");
 const computerScoreDisplay = document.querySelector(".computer-score");
 const winner = document.querySelector(".winner");
+const playAgainBtn = document.querySelector("#play-again");
+
+btn = document.querySelectorAll("button");
+btn.forEach(button => {
+    if (button !== playAgainBtn) {
+    button.addEventListener('click', playRound);
+    }    
+});
+
+playAgainBtn.addEventListener('click', clearHistory);
+
+
