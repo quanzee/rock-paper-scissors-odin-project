@@ -29,58 +29,69 @@ function playRound(event) {
     const computerChoice = getComputerChoice();
     const humanChoice = event.target.textContent;
     let loseMessage = `You lose! ${capitalise(computerChoice)} beats ${humanChoice.toLowerCase()}.`;
-    let winMessage = `You win! ${capitalise(humanChoice)} beats ${humanChoice.toLowerCase()}.`;
+    let winMessage = `You win! ${capitalise(humanChoice)} beats ${computerChoice.toLowerCase()}.`;
     let drawMessage = "It's a draw!";
+
+    computerSelectedChoice.textContent = `Computer played ${computerChoice}.`;
 
     if (humanChoice.toLowerCase() === "rock") {
         if (computerChoice === "paper") {
             computerScore ++;
-            console.log(loseMessage);
+            gameResult.textContent = loseMessage;
         }
 
         else if (computerChoice === "scissors") {
             humanScore ++;
-            console.log(winMessage);
+            gameResult.textContent = winMessage;
         }
 
         else {
-            console.log(drawMessage);
+            gameResult.textContent = drawMessage;
         }
     }
 
     else if (humanChoice.toLowerCase() === "scissors") {
         if (computerChoice === "rock") {
             computerScore ++;
-            console.log(loseMessage);
+            gameResult.textContent = loseMessage;
         }
 
         else if (computerChoice === "paper") {
             humanScore ++;
-            console.log(winMessage);
+            gameResult.textContent = winMessage;
         }
 
         else {
-            console.log(drawMessage);
+            gameResult.textContent = drawMessage;
         }
     }
 
     else if (humanChoice.toLowerCase() === "paper") {
         if (computerChoice === "scissors") {
             computerScore ++;
-            console.log(loseMessage);
+            gameResult.textContent = loseMessage;
         }
 
         else if (computerChoice === "rock") {
             humanScore ++;
-            console.log(winMessage);
+            gameResult.textContent = winMessage;
         }
 
         else {
-            console.log(drawMessage);
+            gameResult.textContent = drawMessage;
         }
     }
-}
 
+    humanScoreDisplay.textContent = `Your score: ${humanScore}`;
+    computerScoreDisplay.textContent = `Computer score: ${computerScore}`;
+
+    if (humanScore === 5){
+        winner.textContent = "You are the winner! Congratulations!"
+    }
+    else if (computerScore === 5) {
+        winner.textContent = "The computer wins! Try again next time."
+    }
+}
 
 
 let humanScore = 0;
@@ -91,5 +102,8 @@ btn.forEach(button => {
     button.addEventListener('click', playRound);    
 });
 
-score = document.createElement('div');
-
+const gameResult = document.querySelector(".game-result");
+const computerSelectedChoice = document.querySelector(".computer-choice");
+const humanScoreDisplay = document.querySelector(".human-score");
+const computerScoreDisplay = document.querySelector(".computer-score");
+const winner = document.querySelector(".winner");

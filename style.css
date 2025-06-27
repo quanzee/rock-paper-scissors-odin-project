@@ -1,0 +1,23 @@
+body {
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: lightgray;
+}
+
+h1 {
+    font-weight: 900;
+}
+
+button {
+    border-radius: 8px;
+    font-size: 24px;
+    background-color: grey;
+    font-family: 'Courier New', Courier, monospace;
+    border-style: none;
+    padding: 10px 10px;
+    margin-bottom: 20px;
+}
+
+div {
+    margin-bottom: 10px;
+}
